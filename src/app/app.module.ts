@@ -5,13 +5,15 @@ import { AppComponent } from './app.component';
 import { HelloWorldComponent } from './hello-world/hello-world.component';
 import { ParentComponent } from './parent/parent.component';
 import { ChildComponent } from './child/child.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HelloWorldComponent,
     ParentComponent,
-    ChildComponent
+    ChildComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule
