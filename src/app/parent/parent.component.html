@@ -1,0 +1,17 @@
+<ol>
+  <li class="green">
+    Binding (@Input, @Output)
+  </li>
+  <li class="green">
+    Reference (@ViewChild, @ContentChild)
+  </li>
+  <li class="red">
+    Provider (Service)
+  </li>
+  <li class="red">
+    TemplateOutlet (@Input, @Output)
+  </li>
+</ol>
+
+<p>parent works!</p>
+<app-child [parentMessage]="messageToChild" (messageEvent)="receiveMessage($event)"></app-child>
