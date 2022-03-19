@@ -1,5 +1,7 @@
 footer {
   background-color: orangered;
   border-top: 1px solid #000;
-
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
 }
