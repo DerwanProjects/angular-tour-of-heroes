@@ -34,7 +34,7 @@ OnDestroy {
   }
   ngOnDestroy(): void { // To muszę znać kompletnie
     console.log('9 Hook');
-    this.intervalSub ?? clearInterval(this.intervalSub);
+    // this.intervalSub ?? clearInterval(this.intervalSub);
   }
   ngAfterViewChecked(): void {
     console.log('8 Hook');
@@ -53,9 +53,9 @@ OnDestroy {
   }
   ngOnInit(): void { // To muszę znać kompletnie
     console.log('3 Hook');
-    this.intervalSub = setInterval(() => {
-      console.log('Hello from ngOnInit Interval')
-    }, 1000);
+    // this.intervalSub = setInterval(() => {
+    //   console.log('Hello from ngOnInit Interval')
+    // }, 1000);
   }
 
   ngOnChanges(changes: SimpleChanges): void { // To muszę znać kompletnie
