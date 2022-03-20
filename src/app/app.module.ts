@@ -6,7 +6,6 @@ import { HelloWorldComponent } from './hello-world/hello-world.component';
 import { ParentComponent } from './parent/parent.component';
 import { ChildComponent } from './child/child.component';
 import { FooterComponent } from './footer/footer.component';
-import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -14,8 +13,7 @@ import { HeaderComponent } from './header/header.component';
     HelloWorldComponent,
     ParentComponent,
     ChildComponent,
-    FooterComponent,
-    HeaderComponent
+    FooterComponent
   ],
   imports: [
     BrowserModule
