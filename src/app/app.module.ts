@@ -6,6 +6,7 @@ import { HelloWorldComponent } from './hello-world/hello-world.component';
 import { ParentComponent } from './parent/parent.component';
 import { ChildComponent } from './child/child.component';
 import { FooterComponent } from './footer/footer.component';
+import { ArticleComponent } from './article/article.component';
 import { HeaderComponent } from './header/header.component';
 
 @NgModule({
@@ -15,6 +16,7 @@ import { HeaderComponent } from './header/header.component';
     ParentComponent,
     ChildComponent,
     FooterComponent,
+    ArticleComponent,
     HeaderComponent
   ],
   imports: [
