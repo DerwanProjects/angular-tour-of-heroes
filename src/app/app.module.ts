@@ -7,6 +7,7 @@ import { ParentComponent } from './parent/parent.component';
 import { ChildComponent } from './child/child.component';
 import { FooterComponent } from './footer/footer.component';
 import { ArticleComponent } from './article/article.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { ArticleComponent } from './article/article.component';
     ParentComponent,
     ChildComponent,
     FooterComponent,
-    ArticleComponent
+    ArticleComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule
