@@ -1,17 +1,10 @@
-<ol>
-  <li class="green">
-    Binding (@Input, @Output)
-  </li>
-  <li class="green">
-    Reference (@ViewChild, @ContentChild)
-  </li>
-  <li class="red">
-    Provider (Service)
-  </li>
-  <li class="red">
-    TemplateOutlet (@Input, @Output)
-  </li>
-</ol>
+<section class="article-list-wrap">
+  <h2 class="article-list__heading">
+    To jest lista artykułów:
+  </h2>
+  <ul class="article-list">
+    <app-article [articleTitle]="'Pierwszy tytuł!'" [articleExcerpt]="'To jest opis pierwszego artykułu'" class="color"> </app-article>
+    <app-article [articleTitle]="'Drugi tytuł!'" [articleExcerpt]="'To jest opis drugiego artykułu'"></app-article>
 
-<p>parent works!</p>
-<app-child [parentMessage]="messageToChild" (messageEvent)="receiveMessage($event)"></app-child>
+  </ul>
+</section>

@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { ArticleComponent } from '../article/article.component';
 
 @Component({
   selector: 'app-parent',
@@ -7,15 +8,23 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ParentComponent implements OnInit {
 
+  @ViewChild(ArticleComponent) ArticleRef!: ArticleComponent;
+
+
   messageToChild = 'przekazuje ci geny!';
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
+
   }
 
-  receiveMessage(message: string) {
-    alert(message);
+  ngAfterViewInit(): void {
+    console.log(this.ArticleRef);
   }
+
+
+
 
 }

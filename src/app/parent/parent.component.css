@@ -4,3 +4,21 @@
 .red {
   color: red;
 }
+
+.article-list-wrap {
+  border: 1px solid #000;
+  margin: 20px 0;
+  max-width: 500px;
+  margin: 0 auto 50px;
+  padding: 20px;
+}
+
+.article-list__heading {
+  font-size: 25px;
+  text-align: center;
+}
+
+.article-list {
+  list-style-type: none;
+  padding: 0;
+}

@@ -1,0 +1,6 @@
+.article-list__item {
+  padding: 20px;
+  border: 1px solid #ddd;
+  text-align: center;
+  margin: 10px 0;
+}
