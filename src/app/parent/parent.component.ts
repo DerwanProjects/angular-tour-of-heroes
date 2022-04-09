@@ -13,6 +13,13 @@ export class ParentComponent implements OnInit {
 
   messageToChild = 'przekazuje ci geny!';
 
+  getActiveArticle(index:number): boolean {
+    if (index === 0) {
+      return true;
+    }
+    return false;
+  }
+
   constructor() {
   }
 
@@ -24,7 +31,9 @@ export class ParentComponent implements OnInit {
     console.log(this.ArticleRef);
   }
 
-
+  ShowInputValue(value: string): void {
+    console.log(value);
+  }
 
 
 }

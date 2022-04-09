@@ -4,3 +4,13 @@
   text-align: center;
   margin: 10px 0;
 }
+
+:host {
+  box-sizing: border-box;
+  display: inline-block;
+  width: 100%;
+}
+
+:host(.isActive) {
+  background-color: #2fa200;
+}

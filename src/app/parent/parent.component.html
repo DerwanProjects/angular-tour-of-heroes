@@ -3,8 +3,9 @@
     To jest lista artykułów:
   </h2>
   <ul class="article-list">
-    <app-article [articleTitle]="'Pierwszy tytuł!'" [articleExcerpt]="'To jest opis pierwszego artykułu'" class="color"> </app-article>
-    <app-article [articleTitle]="'Drugi tytuł!'" [articleExcerpt]="'To jest opis drugiego artykułu'"></app-article>
-
+    <app-article [articleTitle]="'Pierwszy tytuł!'" [articleExcerpt]="'To jest opis pierwszego artykułu'" class="color" [class.isActive]="getActiveArticle(0)"> </app-article>
+    <app-article [articleTitle]="'Drugi tytuł!'" [articleExcerpt]="'To jest opis drugiego artykułu'" [class.isActive]="getActiveArticle(1)"></app-article>
+    <input #inputName value="">
+    <button (click)="ShowInputValue(inputName.value)">test</button>
   </ul>
 </section>
