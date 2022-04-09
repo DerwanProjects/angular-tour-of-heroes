@@ -8,6 +8,8 @@ import { ChildComponent } from './child/child.component';
 import { FooterComponent } from './footer/footer.component';
 import { ArticleListComponent } from './article-list/article-list.component';
 import { HighlightDirective } from './highlight.directive';
+import { ArticleComponent } from './article/article.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { HighlightDirective } from './highlight.directive';
     ChildComponent,
     FooterComponent,
     ArticleListComponent,
-    HighlightDirective
+    HighlightDirective,
+    ArticleComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule
