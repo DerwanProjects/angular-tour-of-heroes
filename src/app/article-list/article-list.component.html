@@ -22,7 +22,7 @@
     ngSwitch
   </li>
   <li>
-
+    ngSwitchCase
   </li>
 </ul>
 
@@ -39,3 +39,55 @@
     index: {{ i }}
   </p>
 </article>
+
+
+
+<!-- <article *ngFor="let article of articles; let i = index; trackBy: identify">
+  <div [ngSwitch]="article.type">
+    <div *ngSwitchCase="'short'">
+      <p style="background-color:red;font-size:25px;">To jest type short: </p>
+      <h2>
+        {{ article.title }}
+      </h2>
+      <p>
+        {{ article.description }}
+        index: {{ i }}
+      </p>
+    </div>
+    <div *ngSwitchCase="'long'">
+      <p style="background-color:red;font-size:25px;">To jest type long: </p>
+      <h2>
+        {{ article.title }}
+      </h2>
+      <p>
+        {{ article.description }}
+        index: {{ i }}
+      </p>
+    </div>
+    <div *ngSwitchDefault>
+      <p style="background-color:red;font-size:25px;">
+        Przepraszamy, artykuł nie istnieje.
+      </p>
+    </div>
+  </div>
+ index: {{ i }}
+</article> -->
+
+
+<h2 class="article-list__heading">Poniżej zadanie z sesji Angular 9 kwietnia 2022r. </h2>
+
+<ul class="article-list">
+  <li appFontLg class="article-list__item" *ngFor="let post of postzSorted;">
+    <img class="article-list__img" src="{{ post.thumbnail }}">
+    <div class="article-list__content">
+      <time class="article-list__date">{{ post.date }}r.</time>
+      <h3 class="article-list__h3">{{ post.title }} </h3>
+      <p class="article-list__p">
+        {{ post.body.substring(0, 120) }}
+      </p>
+      <button [appArticleLength]="post.body" class="article-list__more">
+        Więcej...
+      </button>
+    </div>
+  </li>
+</ul>
