@@ -22,8 +22,7 @@ export class FontLgDirective {
 
 
    private fontLg(fontSize:string):void {
-
-    this.el.nativeElement.style.fontSize = fontSize;
+    this.el.nativeElement.querySelector('h3').style.fontSize = fontSize;
    }
 
 }
