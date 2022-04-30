@@ -23,8 +23,6 @@ export class FontLgDirective {
 
    private fontLg(fontSize:string):void {
 
-     @input('params')
-     
     this.el.nativeElement.style.fontSize = fontSize;
    }
 
