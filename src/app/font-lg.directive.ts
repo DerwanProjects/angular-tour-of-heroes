@@ -22,7 +22,10 @@ export class FontLgDirective {
 
 
    private fontLg(fontSize:string):void {
-    this.el.nativeElement.querySelector('h3').style.fontSize = fontSize;
+
+     @input('params')
+     
+    this.el.nativeElement.style.fontSize = fontSize;
    }
 
 }
