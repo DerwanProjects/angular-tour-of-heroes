@@ -12,6 +12,7 @@ import { ArticleComponent } from './article/article.component';
 import { HeaderComponent } from './header/header.component';
 import { FontLgDirective } from './font-lg.directive';
 import { ArticleLengthDirective } from './article-length.directive';
+import { TrimLengthPipe } from './pipes/trim-length.pipe';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ArticleLengthDirective } from './article-length.directive';
     ArticleComponent,
     HeaderComponent,
     FontLgDirective,
-    ArticleLengthDirective
+    ArticleLengthDirective,
+    TrimLengthPipe
   ],
   imports: [
     BrowserModule
