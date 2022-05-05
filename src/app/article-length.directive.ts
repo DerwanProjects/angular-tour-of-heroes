@@ -5,7 +5,6 @@ import { Directive, HostListener, Input, ElementRef } from '@angular/core';
 })
 export class ArticleLengthDirective {
 
-
   // to poczatek input()
     private articleBody: string = 'Lorem ipsum...';
     private openedArticle = false;
@@ -45,6 +44,4 @@ export class ArticleLengthDirective {
       }
     }
 
-
-
-  }
+}

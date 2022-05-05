@@ -6,10 +6,12 @@
   flex-direction: column;
   padding: 0;
 }
+
 .article-list__heading {
   color: orangered;
   text-decoration: underline;
 }
+
 .article-list__item {
   border: 1px solid #D3D3D3;
   width: 100%;
