@@ -1,14 +1,15 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'app-child',
   templateUrl: './child.component.html',
   styleUrls: ['./child.component.css']
 })
-export class ChildComponent implements OnInit {
+export class ChildComponent implements OnInit, AfterViewInit {
 
   @Input() parentMessage: string = '';
   @Output() messageEvent = new EventEmitter<string>();
+
 
   constructor() { }
 
@@ -18,5 +19,10 @@ export class ChildComponent implements OnInit {
   sendMessage() {
     this.messageEvent.emit('Hello from Child');
   }
+
+  ngAfterViewInit() {
+
+  }
+
 
 }

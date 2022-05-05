@@ -10,6 +10,8 @@ import { ArticleListComponent } from './article-list/article-list.component';
 import { HighlightDirective } from './highlight.directive';
 import { ArticleComponent } from './article/article.component';
 import { HeaderComponent } from './header/header.component';
+import { FontLgDirective } from './font-lg.directive';
+import { ArticleLengthDirective } from './article-length.directive';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import { HeaderComponent } from './header/header.component';
     HighlightDirective,
     ArticleComponent,
     HeaderComponent,
+    FontLgDirective,
+    ArticleLengthDirective,
   ],
   imports: [
     BrowserModule
