@@ -22,6 +22,18 @@
 </div>
 
 <div class="content" role="main">
+  <app-table (emitTrElement)="receiveTrElement($event)"></app-table>
+  <p *ngIf="id !== -1" class="paragraph text-center" #paragraph>
+    <span class="paragraph__title">Zaznaczono:</span>
+    <br>
+    <span class="paragraph__element">Imię i Nazwisko:</span> {{ users[id-1].name }}<br>
+    <span class="paragraph__element">Stanowisko:</span> {{ users[id-1].position }}<br>
+    <span class="paragraph__element">Data utworzenia:</span> {{ users[id-1].created }}<br>
+    <span class="paragraph__element">Data ostatniej aktywności:</span> {{ users[id-1].last_activity }}<br>
+    <button class="delete" (click)="removeParagraph()">
+      Usuń
+    </button>
+  </p>
   <app-article></app-article>
   <app-article-list></app-article-list>
 <!-- <app-article-list></app-article-list>
