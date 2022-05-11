@@ -22,6 +22,21 @@
 </div>
 
 <div class="content" role="main">
+
+  <ul>
+    <li>
+      <a routerLink="/contact">Contact</a>
+    </li>
+    <li>
+      <a routerLink="/page-1">Page 1</a>
+    </li>
+    <li>
+      <a routerLink="/page-2">Page 2</a>
+    </li>
+  </ul>
+
+  <router-outlet></router-outlet>
+
   <app-table (emitTrElement)="receiveTrElement($event)"></app-table>
   <p *ngIf="id !== -1" class="paragraph text-center" #paragraph>
     <span class="paragraph__title">Zaznaczono:</span>
