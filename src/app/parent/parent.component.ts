@@ -8,6 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class ParentComponent implements OnInit {
 
   messageToChild = 'przekazuje ci geny!';
+  message: string;
 
   constructor() { }
 
