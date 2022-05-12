@@ -74,11 +74,14 @@
 </article> -->
 
 
-
-<h2 class="article-list__heading">Zadanie #1 (wykorzystujące Snapshot) z 7 maja 2022r. </h2>
+<h2 class="article-list__heading">
+  Zadanie #1 (wykorzystujące Snapshot) z 7 maja 2022r.
+  <br>
+  <span>ID są nie po kolei, gdyż artykuły są posortowane po dacie</span>
+</h2>
 
 <ul class="article-list">
-  <li appFontLg class="article-list__item" *ngFor="let post of postzSorted;">
+  <li class="article-list__item" *ngFor="let post of postzSorted;">
     <img class="article-list__img" src="{{ post.thumbnail }}">
     <div class="article-list__content">
       <time class="article-list__date">{{ post.date }}r.</time>
@@ -86,9 +89,12 @@
       <p class="article-list__p">
         {{ post.body | trimLength }}
       </p>
-      <button [appArticleLength]="post.body" class="article-list__more">
+      <button routerLink="/article/{{post.id}}"  class="article-list__more">
         Więcej...
       </button>
     </div>
   </li>
 </ul>
+
+
+

@@ -1,1 +1,12 @@
-<p>article works!</p>
+<button routerLink="/">< Wróć</button>
+
+<article class="article__item">
+  <img class="article__img" src="{{ article.thumbnail }}">
+  <div class="article__content">
+    <time class="article__date">{{ article.date }}r.</time>
+    <h3 class="article__h3">{{ article.title }} </h3>
+    <p class="article__p">
+      {{ article.body | trimLength }}
+    </p>
+  </div>
+</article>

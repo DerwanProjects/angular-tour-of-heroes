@@ -1,0 +1,9 @@
+.article__item {
+  text-align: center;
+}
+.article__img {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+}
