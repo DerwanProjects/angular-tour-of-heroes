@@ -1,12 +1,35 @@
 <button routerLink="/">< Wróć</button>
 
-<article class="article__item">
-  <img class="article__img" src="{{ article.thumbnail }}">
-  <div class="article__content">
+<article class="article__item" [hidden]="editingEnabled" >
+  <header>
+    <img class="article__img" src="{{ article.thumbnail }}">
     <time class="article__date">{{ article.date }}r.</time>
     <h3 class="article__h3">{{ article.title }} </h3>
-    <p class="article__p">
-      {{ article.body | trimLength }}
-    </p>
-  </div>
+  </header>
+  <main>
+    <div class="article__content">
+      <p class="article__p" >
+        {{ article.body }}
+      </p>
+    </div>
+  </main>
+  <footer style="display: flex;justify-content: center;margin:15px 0;">
+    <button (click)="enableEditing()">Edycja</button>
+  </footer>
 </article>
+
+
+
+<form [hidden]="!editingEnabled" (ngSubmit)="onSubmit(f)" #f="ngForm">
+  <div class="form-field">
+    <label for="title">Tytuł</label>
+    <input class="edit__title" id="title" type="text" [(ngModel)]="article.title" name="title" />
+  </div>
+  <div class="form-field">
+    <label for="body">Treść</label>
+    <textarea class="edit__body" id="body" type="text" [(ngModel)]="article.body" name="body">
+
+    </textarea>
+  </div>
+  <button (click)="enableEditing()">Zapisz</button>
+</form>

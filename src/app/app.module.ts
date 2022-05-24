@@ -15,6 +15,8 @@ import { ArticleLengthDirective } from './article-length.directive';
 import { TrimLengthPipe } from './pipes/trim-length.pipe';
 import { ArticlesRouterModule } from './app-articles-router.module';
 import { ArticleListService } from './services/article-list.service';
+import { ArticleFormComponent } from './article-form/article-form.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -29,10 +31,12 @@ import { ArticleListService } from './services/article-list.service';
     HeaderComponent,
     FontLgDirective,
     ArticleLengthDirective,
-    TrimLengthPipe
+    TrimLengthPipe,
+    ArticleFormComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     ArticlesRouterModule
   ],
   providers: [ArticleListService],
