@@ -13,6 +13,16 @@ import { HeaderComponent } from './header/header.component';
 import { FontLgDirective } from './font-lg.directive';
 import { ArticleLengthDirective } from './article-length.directive';
 import { TrimLengthPipe } from './pipes/trim-length.pipe';
+import { ClickService } from './services/click.service';
+import { TableComponent } from './table/table.component';
+import { Highlight2Directive } from './highlight-2.directive';
+import { GetTableRowIdDirective } from './get-table-row-id.directive';
+import { Page1Component } from './page1/page1.component';
+import { Page2Component } from './page2/page2.component';
+import { AppRouterModule } from './app-router.module';
+import { ChildAComponent } from './child-a/child-a.component';
+import { ChildBComponent } from './child-b/child-b.component';
+
 
 @NgModule({
   declarations: [
@@ -27,12 +37,20 @@ import { TrimLengthPipe } from './pipes/trim-length.pipe';
     HeaderComponent,
     FontLgDirective,
     ArticleLengthDirective,
-    TrimLengthPipe
+    TrimLengthPipe,
+    TableComponent,
+    Highlight2Directive,
+    GetTableRowIdDirective,
+    Page1Component,
+    Page2Component,
+    ChildAComponent,
+    ChildBComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRouterModule
   ],
-  providers: [],
+  providers: [ClickService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

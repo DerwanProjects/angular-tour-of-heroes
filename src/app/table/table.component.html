@@ -1,0 +1,34 @@
+<section class="table-wrap">
+  <table *ngIf="users.length; else emptyList">
+    <caption>Tabela użytkowników</caption>
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Nazwa</th>
+        <th scope="col">Stanowisko</th>
+        <th scope="col">Data utworzenia</th>
+        <th scope="col">Data ostatniej aktywności</th>
+        <th scope="col">Akcje</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users" data-id="{{ user.id }}" [appHighlight]="'lightgreen'" appHighlight2 #trElement
+        (click)="emitTrElement(trElement)">
+        <td data-label="Id"> {{ user.id }} </td>
+        <td data-label="Nazwa"> {{ user.name }} </td>
+        <td data-label="Stanowisko"> {{ user.position }} </td>
+        <td data-label="Data utworzenia"> {{ user.created }} </td>
+        <td data-label="Data ostatniej aktywności"> {{ user.last_activity }} </td>
+        <td data-label="Akcje"> {{ user.actions }} </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+
+  <ng-template #emptyList>
+    <h1>Lista jest pusta, panuje wolność :)</h1>
+  </ng-template>
+</section>
+
+
