@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ArticleListService } from '../services/article-list.service';
 
@@ -10,10 +10,9 @@ import { ArticleListService } from '../services/article-list.service';
 })
 export class ArticleListComponent implements OnInit {
 
-  @Output() test = new EventEmitter<string>();
 
   isActive = false;
-  postzSorted: any;
+  articlesList: any;
   urlAddress: string;
   buildUrl: string = '';
 
@@ -34,18 +33,11 @@ export class ArticleListComponent implements OnInit {
 
 
 
-
-  makeUnixTimestamp(dateString: string): number {
-    let dateArray = dateString.split("-").map(Number);
-    let date = new Date(dateArray[0], dateArray[1] - 1, dateArray[2]); // zwróć sekwencję year,month,day
-    let unixDate = date.getTime();
-    return unixDate;
+  ngDoCheck() {
+    console.log('test');
   }
 
-  sortPosts(): {} {
-    this.postzSorted = this.articleListService.postz.sort((a,b) => this.makeUnixTimestamp(a.date) - this.makeUnixTimestamp(b.date) );
-    return this.postzSorted;
-  }
+
 
 
   get curretClasses() {
@@ -72,16 +64,19 @@ export class ArticleListComponent implements OnInit {
             private route: ActivatedRoute) { }
 
 
-  sendUrlToArticle() {
-    this.test.emit(this.buildUrl);
-  }
+
+
 
   ngOnInit(): void {
-    this.sortPosts();
+    console.log(this.articleListService.getAllArticles());
+    this.articlesList = this.articleListService.getAllArticles();
     // budujemy adres URL który zostanie przekazany do pojedynczego artykułu za pomocą property binding (@Input())
     this.route.snapshot.url.forEach(element => {
         this.buildUrl +=  '/' + element.path;
     });
   }
+
+
+
 
 }

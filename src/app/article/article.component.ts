@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ArticleListService } from '../services/article-list.service';
@@ -16,7 +16,8 @@ export class ArticleComponent implements OnInit {
   editingEnabled:boolean = false;
 
   constructor(private route: ActivatedRoute,
-    private articleListService: ArticleListService) { }
+    private articleListService: ArticleListService,
+    private elementRef: ElementRef) { }
 
 
   ngOnInit(): void {
@@ -24,17 +25,17 @@ export class ArticleComponent implements OnInit {
     this.getId = this.route.snapshot.params['id'];
     this.getId = this.getId - 1;
     this.article = {
-      id: this.articleListService.postz[this.getId].id,
-      thumbnail: this.articleListService.postz[this.getId].thumbnail,
-      title: this.articleListService.postz[this.getId].title,
-      body: this.articleListService.postz[this.getId].body,
-      date: this.articleListService.postz[this.getId].date,
-      type: this.articleListService.postz[this.getId].type,
+      id: this.articleListService.articles[this.getId].id,
+      thumbnail: this.articleListService.articles[this.getId].thumbnail,
+      title: this.articleListService.articles[this.getId].title,
+      body: this.articleListService.articles[this.getId].body,
+      date: this.articleListService.articles[this.getId].date,
+      type: this.articleListService.articles[this.getId].type,
     }
     // Jak pobrać artykuł ?
     // console.log(this.route.snapshot);
-    console.log(this.articleListService);
   }
+
 
 
   enableEditing() {
@@ -43,8 +44,15 @@ export class ArticleComponent implements OnInit {
 
 
   onSubmit(form: NgForm) {
-    console.log(form);
+    this.getId = this.route.snapshot.params['id'] - 1;
+    this.articleListService.saveChanges(this.getId, form.value.title, form.value.body);
+    console.log(this.articleListService.getAllArticles());
   }
+
+  // sendChangedArticle() {
+  //   let changedArticle = this.articleListService.getArticleById(this.getId-1);
+  //   this.emitChangedArticle.emit(changedArticle);
+  // }
 
 
 

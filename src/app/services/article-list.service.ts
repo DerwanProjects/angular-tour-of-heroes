@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
+import { Article } from '../article.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ArticleListService {
 
+  articlesSorted: any;
 
-  postz = [
+  articles: Array<Article> = [
     {
       id: 1,
       thumbnail: 'https://images.unsplash.com/photo-1649264889763-5cba7bca8335?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80',
@@ -49,5 +51,36 @@ export class ArticleListService {
     },
   ] as Array<{id: number, thumbnail: string,title: string,body: string, date: string, type:'excerpt'|'full'}>;
 
+
   constructor() { }
+
+
+  // makeUnixTimestamp(dateString: string): number {
+  //   let dateArray = dateString.split("-").map(Number);
+  //   let date = new Date(dateArray[0], dateArray[1] - 1, dateArray[2]); // zwróć sekwencję year,month,day
+  //   let unixDate = date.getTime();
+  //   return unixDate;
+  // }
+
+  // sortPosts(): {} {
+  //   this.articlesSorted = this.articles.sort((a,b) => this.makeUnixTimestamp(a.date) - this.makeUnixTimestamp(b.date) );
+  //   return this.articlesSorted;
+  // }
+
+  // w momencie zapisywania informacji te informacje muszą być wysyłane do serwisu
+  getArticleById(id:number) {
+    return this.articles[id];
+  }
+
+  saveChanges(id:number, articleTitle:string, articleBody:string) {
+    let article = this.getArticleById(id);
+    article.title = articleTitle;
+    article.body = articleBody;
+    return article;
+  }
+
+
+  getAllArticles() {
+    return this.articles;
+  }
 }
