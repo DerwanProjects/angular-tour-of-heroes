@@ -78,8 +78,12 @@
   Zadanie #1 (wykorzystujące Two way data binding) z 21 maja 2022r.
 </h2>
 
+<!-- (onRefresh)="receiveArticles($event)" -->
+
+<div (onRefresh)="receiveArticles($event)"></div>
+
 <ul class="article-list">
-  <li class="article-list__item" *ngFor="let article of articlesList;" >
+  <li class="article-list__item" *ngFor="let article of articlesList;" (onRefresh)="receiveArticles($event)">
     <img class="article-list__img" src="{{ article.thumbnail }}">
     <div class="article-list__content">
       <time class="article-list__date">{{ article.date }}r.</time>
@@ -93,6 +97,7 @@
     </div>
   </li>
 </ul>
+
 
 
 

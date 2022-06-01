@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, AfterViewInit  } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ArticleListService } from '../services/article-list.service';
 
@@ -11,10 +11,13 @@ import { ArticleListService } from '../services/article-list.service';
 export class ArticleListComponent implements OnInit {
 
 
+
   isActive = false;
   articlesList: any;
   urlAddress: string;
   buildUrl: string = '';
+
+
 
   articles = [
     {
@@ -33,9 +36,14 @@ export class ArticleListComponent implements OnInit {
 
 
 
-  ngDoCheck() {
-    console.log('test');
-  }
+
+
+
+
+
+  // 6. kiedy w komponencie zapisujesz dane korzystasz z service.saveArticle(article); po czym do lokalnej wersji article podmieniasz wartość za pomocą service.getArticles()
+
+
 
 
 
@@ -60,16 +68,30 @@ export class ArticleListComponent implements OnInit {
   }
 
   constructor(
+            private changeDetector: ChangeDetectorRef,
             private articleListService: ArticleListService,
-            private route: ActivatedRoute) { }
+            private route: ActivatedRoute) { this.articlesList = this.articleListService.getAllArticles(); }
 
+
+
+
+
+  fetchData(): any {
+    return this.articlesList;
+  }
+
+
+  receiveArticles(test: string) {
+    alert(test);
+    // return this.articlesList = changedArticlesList;
+  }
 
 
 
 
   ngOnInit(): void {
-    console.log(this.articleListService.getAllArticles());
-    this.articlesList = this.articleListService.getAllArticles();
+    this.changeDetector.detectChanges();
+    this.fetchData();
     // budujemy adres URL który zostanie przekazany do pojedynczego artykułu za pomocą property binding (@Input())
     this.route.snapshot.url.forEach(element => {
         this.buildUrl +=  '/' + element.path;

@@ -5,6 +5,6 @@ export class Article {
     public title: string,
     public body: string,
     public date: string,
-    public type: 'excerpt'|'full',
+    public type: string,
   ) {}
 }

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter, Output, ChangeDetectorRef } from '@angular/core';
 import { Article } from '../article.model';
 
 @Injectable({
@@ -6,6 +6,7 @@ import { Article } from '../article.model';
 })
 export class ArticleListService {
 
+  @Output() aClickedEvent  = new EventEmitter();
   articlesSorted: any;
 
   articles: Array<Article> = [
@@ -49,10 +50,12 @@ export class ArticleListService {
       date: '2017-06-18',
       type: 'full',
     },
-  ] as Array<{id: number, thumbnail: string,title: string,body: string, date: string, type:'excerpt'|'full'}>;
+  ] as Array<{id: number, thumbnail: string,title: string,body: string, date: string, type: string}>;
 
 
-  constructor() { }
+  constructor(
+    private changeDetector: ChangeDetectorRef,
+    ) {  }
 
 
   // makeUnixTimestamp(dateString: string): number {
@@ -68,16 +71,19 @@ export class ArticleListService {
   // }
 
   // w momencie zapisywania informacji te informacje muszą być wysyłane do serwisu
-  getArticleById(id:number) {
-    return this.articles[id];
+  getArticleById(id:number): Article | undefined {
+    return this.articles.find(article => article.id);
   }
 
-  saveChanges(id:number, articleTitle:string, articleBody:string) {
-    let article = this.getArticleById(id);
-    article.title = articleTitle;
-    article.body = articleBody;
-    return article;
+  saveArticle(article: Article): void {
+    const originalArticle = this.getArticleById(article.id);
+    const index = this.articles.findIndex(a => a.id === article.id);
+    if (originalArticle) {
+      this.articles.splice(index, 1, article);
+    }
   }
+
+
 
 
   getAllArticles() {

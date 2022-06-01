@@ -1,7 +1,8 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ArticleListService } from '../services/article-list.service';
+import { Article } from '../article.model';
 
 @Component({
   selector: 'app-article',
@@ -11,11 +12,15 @@ import { ArticleListService } from '../services/article-list.service';
 })
 export class ArticleComponent implements OnInit {
 
-  article: {id: number, thumbnail: string,title: string,body: string, date: string, type:'excerpt'|'full'};
+  @Output() onRefresh: EventEmitter<string> = new EventEmitter<string>();
+  article: {id:number, thumbnail:string, title:string, body:string, date:string, type:string};
+  articlesList = this.articleListService.getAllArticles();
+  types = ["excerpt", "full"];
   getId: number;
   editingEnabled:boolean = false;
 
-  constructor(private route: ActivatedRoute,
+  constructor(
+    private route: ActivatedRoute,
     private articleListService: ArticleListService,
     private elementRef: ElementRef) { }
 
@@ -38,21 +43,28 @@ export class ArticleComponent implements OnInit {
 
 
 
+  fetchData():void {
+    this.articlesList = this.articleListService.getAllArticles();
+
+  }
+
   enableEditing() {
     this.editingEnabled = !this.editingEnabled;
   }
 
 
-  onSubmit(form: NgForm) {
-    this.getId = this.route.snapshot.params['id'] - 1;
-    this.articleListService.saveChanges(this.getId, form.value.title, form.value.body);
-    console.log(this.articleListService.getAllArticles());
+  onSubmit(form: NgForm): void {
+    const article = new Article(form.value.id, form.value.thumbnail, form.value.title, form.value.body, form.value.date, 'test');
+    this.articleListService.saveArticle(article);
   }
 
-  // sendChangedArticle() {
-  //   let changedArticle = this.articleListService.getArticleById(this.getId-1);
-  //   this.emitChangedArticle.emit(changedArticle);
-  // }
+
+
+  onClickBack() {
+    this.onRefresh.emit('Hello from Child');
+  }
+
+
 
 
 

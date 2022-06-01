@@ -1,4 +1,4 @@
-<button routerLink="/">< Wróć</button>
+<button routerLink="/" (click)="onClickBack()">< Wróć</button>
 
 <article class="article__item" [hidden]="editingEnabled" >
   <header>
@@ -22,14 +22,31 @@
 
 <form [hidden]="!editingEnabled" (ngSubmit)="onSubmit(f)" #f="ngForm">
   <div class="form-field">
+    <label for="id">ID</label>
+    <input id="id" type="text" [(ngModel)]="article.id" name="id" />
+  </div>
+  <div class="form-field">
+    <label for="thumbnail">Thumbnail</label>
+    <input id="thumbnail" type="text" [(ngModel)]="article.thumbnail" name="thumbnail" />
+  </div>
+  <div class="form-field">
     <label for="title">Tytuł</label>
-    <input class="edit__title" id="title" type="text" [(ngModel)]="article.title" name="title" />
+    <input id="title" type="text" [(ngModel)]="article.title" name="title" />
   </div>
   <div class="form-field">
     <label for="body">Treść</label>
     <textarea class="edit__body" id="body" type="text" [(ngModel)]="article.body" name="body">
-
     </textarea>
+  </div>
+  <div class="form-field">
+    <label for="date">Data</label>
+    <input id="date" type="date" [(ngModel)]="article.date" name="date" />
+  </div>
+  <div class="form-field">
+    <label for="type">Typ</label>
+    <select id="type" required name="type">
+      <option *ngFor="let type of types" [value]="type">{{ type }}</option>
+    </select>
   </div>
   <button (click)="enableEditing()">Zapisz</button>
 </form>
