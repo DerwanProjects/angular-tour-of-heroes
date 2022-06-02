@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef, AfterViewInit  } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, NavigationError, NavigationStart, Router, Event } from '@angular/router';
 import { ArticleListService } from '../services/article-list.service';
 
 @Component({
@@ -70,14 +70,18 @@ export class ArticleListComponent implements OnInit {
   constructor(
             private changeDetector: ChangeDetectorRef,
             private articleListService: ArticleListService,
-            private route: ActivatedRoute) { this.articlesList = this.articleListService.getAllArticles(); }
+            private router: Router,
+            private route: ActivatedRoute)
+            { }
 
 
 
 
 
-  fetchData(): any {
-    return this.articlesList;
+  fetchData(): void {
+    console.log('fetch Data Before', this.articlesList);
+    this.articlesList = [...this.articleListService.getAllArticles()];
+    console.log('fetch Data After', this.articlesList);
   }
 
 
@@ -90,8 +94,21 @@ export class ArticleListComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.changeDetector.detectChanges();
     this.fetchData();
+    this.router.events.subscribe(
+      (event: Event) => {
+        if (event instanceof NavigationStart) {
+        // Show loading indicator
+        }
+        if (event instanceof NavigationEnd) {
+        // Hide loading indicator
+        this.fetchData();
+        }
+        if (event instanceof NavigationError) {
+        // Hide loading indicator
+        // Present error to user console.log(event.error);
+        }
+      });
     // budujemy adres URL który zostanie przekazany do pojedynczego artykułu za pomocą property binding (@Input())
     this.route.snapshot.url.forEach(element => {
         this.buildUrl +=  '/' + element.path;

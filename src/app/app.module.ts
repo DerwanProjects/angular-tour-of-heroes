@@ -14,7 +14,6 @@ import { FontLgDirective } from './font-lg.directive';
 import { ArticleLengthDirective } from './article-length.directive';
 import { TrimLengthPipe } from './pipes/trim-length.pipe';
 import { ArticlesRouterModule } from './app-articles-router.module';
-import { ArticleListService } from './services/article-list.service';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
@@ -37,7 +36,7 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
     ArticlesRouterModule
   ],
-  providers: [ArticleListService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

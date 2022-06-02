@@ -1,52 +1,56 @@
-<button routerLink="/" (click)="onClickBack()">< Wróć</button>
+<ng-container *ngIf="article">
+  <button (click)="onClickBack()">
+    &lt; Wróć</button>
 
-<article class="article__item" [hidden]="editingEnabled" >
-  <header>
-    <img class="article__img" src="{{ article.thumbnail }}">
-    <time class="article__date">{{ article.date }}r.</time>
-    <h3 class="article__h3">{{ article.title }} </h3>
-  </header>
-  <main>
-    <div class="article__content">
-      <p class="article__p" >
-        {{ article.body }}
-      </p>
-    </div>
-  </main>
-  <footer style="display: flex;justify-content: center;margin:15px 0;">
-    <button (click)="enableEditing()">Edycja</button>
-  </footer>
-</article>
+      <article class="article__item" [hidden]="editingEnabled">
+        <header>
+          <img class="article__img" src="{{ article.thumbnail }}">
+          <time class="article__date">{{ article.date }}r.</time>
+          <h3 class="article__h3">{{ article.title }} </h3>
+        </header>
+        <main>
+          <div class="article__content">
+            <p class="article__p">
+              {{ article.body }}
+            </p>
+          </div>
+        </main>
+        <footer style="display: flex;justify-content: center;margin:15px 0;">
+          <button (click)="enableEditing()">Edycja</button>
+        </footer>
+      </article>
 
 
 
-<form [hidden]="!editingEnabled" (ngSubmit)="onSubmit(f)" #f="ngForm">
-  <div class="form-field">
-    <label for="id">ID</label>
-    <input id="id" type="text" [(ngModel)]="article.id" name="id" />
-  </div>
-  <div class="form-field">
-    <label for="thumbnail">Thumbnail</label>
-    <input id="thumbnail" type="text" [(ngModel)]="article.thumbnail" name="thumbnail" />
-  </div>
-  <div class="form-field">
-    <label for="title">Tytuł</label>
-    <input id="title" type="text" [(ngModel)]="article.title" name="title" />
-  </div>
-  <div class="form-field">
-    <label for="body">Treść</label>
-    <textarea class="edit__body" id="body" type="text" [(ngModel)]="article.body" name="body">
-    </textarea>
-  </div>
-  <div class="form-field">
-    <label for="date">Data</label>
-    <input id="date" type="date" [(ngModel)]="article.date" name="date" />
-  </div>
-  <div class="form-field">
-    <label for="type">Typ</label>
-    <select id="type" required name="type">
-      <option *ngFor="let type of types" [value]="type">{{ type }}</option>
-    </select>
-  </div>
-  <button (click)="enableEditing()">Zapisz</button>
-</form>
+      <form [hidden]="!editingEnabled" (ngSubmit)="onSubmit(f)" #f="ngForm">
+        <div class="form-field">
+          <label for="id">ID</label>
+          <input id="id" type="text" [(ngModel)]="article.id" name="id" />
+        </div>
+        <div class="form-field">
+          <label for="thumbnail">Thumbnail</label>
+          <input id="thumbnail" type="text" [(ngModel)]="article.thumbnail" name="thumbnail" />
+        </div>
+        <div class="form-field">
+          <label for="title">Tytuł</label>
+          <input id="title" type="text" [(ngModel)]="article.title" name="title" />
+        </div>
+        <div class="form-field">
+          <label for="body">Treść</label>
+          <textarea class="edit__body" id="body" type="text" [(ngModel)]="article.body" name="body">
+        </textarea>
+        </div>
+        <div class="form-field">
+          <label for="date">Data</label>
+          <input id="date" type="date" [(ngModel)]="article.date" name="date" />
+        </div>
+        <div class="form-field">
+          <label for="type">Typ</label>
+          <select id="type" required name="type">
+            <option *ngFor="let type of types" [value]="type">{{ type }}</option>
+          </select>
+        </div>
+        <button (click)="enableEditing()">Zapisz</button>
+      </form>
+
+</ng-container>

@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ArticleListService } from '../services/article-list.service';
 import { Article } from '../article.model';
 
@@ -13,13 +13,14 @@ import { Article } from '../article.model';
 export class ArticleComponent implements OnInit {
 
   @Output() onRefresh: EventEmitter<string> = new EventEmitter<string>();
-  article: {id:number, thumbnail:string, title:string, body:string, date:string, type:string};
+  article: Article | undefined;
   articlesList = this.articleListService.getAllArticles();
   types = ["excerpt", "full"];
   getId: number;
   editingEnabled:boolean = false;
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private articleListService: ArticleListService,
     private elementRef: ElementRef) { }
@@ -27,26 +28,23 @@ export class ArticleComponent implements OnInit {
 
   ngOnInit(): void {
     // let id = this.route.snapshot.paramMap.get('id');
-    this.getId = this.route.snapshot.params['id'];
-    this.getId = this.getId - 1;
-    this.article = {
-      id: this.articleListService.articles[this.getId].id,
-      thumbnail: this.articleListService.articles[this.getId].thumbnail,
-      title: this.articleListService.articles[this.getId].title,
-      body: this.articleListService.articles[this.getId].body,
-      date: this.articleListService.articles[this.getId].date,
-      type: this.articleListService.articles[this.getId].type,
-    }
+    const id = this.route.snapshot.paramMap.get('id') || '';
+    console.log(id);
+    // this.getId = this.getId - 1;
+    // this.article = {
+    //   id: this.articleListService.articles[this.getId].id,
+    //   thumbnail: this.articleListService.articles[this.getId].thumbnail,
+    //   title: this.articleListService.articles[this.getId].title,
+    //   body: this.articleListService.articles[this.getId].body,
+    //   date: this.articleListService.articles[this.getId].date,
+    //   type: this.articleListService.articles[this.getId].type,
+    // }
     // Jak pobrać artykuł ?
     // console.log(this.route.snapshot);
+    this.article = this.articleListService.getArticleById(+id);
   }
 
 
-
-  fetchData():void {
-    this.articlesList = this.articleListService.getAllArticles();
-
-  }
 
   enableEditing() {
     this.editingEnabled = !this.editingEnabled;
@@ -61,6 +59,7 @@ export class ArticleComponent implements OnInit {
 
 
   onClickBack() {
+    this.router.navigate(['/']);
     this.onRefresh.emit('Hello from Child');
   }
 
