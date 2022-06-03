@@ -10,6 +10,8 @@ import { ArticleListComponent } from './article-list/article-list.component';
 import { HighlightDirective } from './highlight.directive';
 import { ArticleComponent } from './article/article.component';
 import { HeaderComponent } from './header/header.component';
+import { MyFormComponent } from './my-form/my-form.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,10 +23,13 @@ import { HeaderComponent } from './header/header.component';
     ArticleListComponent,
     HighlightDirective,
     ArticleComponent,
-    HeaderComponent
+    HeaderComponent,
+    MyFormComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
