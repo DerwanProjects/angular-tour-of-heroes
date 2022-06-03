@@ -29,7 +29,20 @@
         </div>
         <div class="form-field">
           <label for="thumbnail">Thumbnail</label>
-          <input id="thumbnail" type="text" [(ngModel)]="article.thumbnail" name="thumbnail" />
+          <input
+            id="thumbnail"
+            type="text"
+            [(ngModel)]="article.thumbnail"
+            name="thumbnail"
+            #thumbnail="ngModel"
+            required
+          />
+          <div *ngIf="thumbnail.invalid && (thumbnail.dirty || thumbnail.touched)">
+            <div *ngIf="thumbnail.errors?.['required']">
+              To pole nie może być puste
+            </div>
+
+          </div>
         </div>
         <div class="form-field">
           <label for="title">Tytuł</label>
