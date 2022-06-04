@@ -14,10 +14,15 @@ export class MyFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.signupForm = new FormGroup({
-      'username': new FormControl(null, Validators.required),
+      'username': new FormControl(null, [
+        Validators.minLength(5)
+      ]),
       'email': new FormControl(null, [Validators.required, Validators.email])
     });
   }
+
+
+  get username() { return this.signupForm.get('username'); }
 
 
   onSubmit() {
