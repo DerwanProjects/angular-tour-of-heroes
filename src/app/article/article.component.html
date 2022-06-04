@@ -22,19 +22,15 @@
 
 
 
-      <form [hidden]="!editingEnabled" (ngSubmit)="onSubmit(f)" #f="ngForm">
-        <div class="form-field">
-          <label for="id">ID</label>
-          <input id="id" type="text" [(ngModel)]="article.id" name="id" />
-        </div>
+      <form [hidden]="!editingEnabled" [formGroup]="editForm" (ngSubmit)="onSubmit()">
         <div class="form-field">
           <label for="thumbnail">Thumbnail</label>
           <input
             id="thumbnail"
-            type="text"
             [(ngModel)]="article.thumbnail"
-            name="thumbnail"
-            #thumbnail="ngModel"
+            type="text"
+            formControlName="thumbnail"
+            value="{{article.thumbnail}}"
             required
           />
           <div *ngIf="thumbnail.invalid && (thumbnail.dirty || thumbnail.touched)">
@@ -46,20 +42,65 @@
         </div>
         <div class="form-field">
           <label for="title">Tytuł</label>
-          <input id="title" type="text" [(ngModel)]="article.title" name="title" />
+          <input
+            id="title"
+            [(ngModel)]="article.title"
+            type="text"
+            formControlName="title"
+            value="{{article.title}}"
+            appUniqueName="anaa"
+            required
+          />
+          <div *ngIf="title.invalid && (title.dirty || title.touched)">
+            <div *ngIf="title.errors?.required">
+              To pole nie może być puste
+            </div>
+            <div *ngIf="title.errors?.forbiddenName">
+              Pole nie może zawierać:&nbsp;{{ title.errors?.forbiddenName.value }}
+            </div>
+          </div>
         </div>
         <div class="form-field">
           <label for="body">Treść</label>
-          <textarea class="edit__body" id="body" type="text" [(ngModel)]="article.body" name="body">
+          <textarea
+            class="edit__body"
+            id="body"
+            [(ngModel)]="article.body"
+            type="text"
+            formControlName="body"
+            value="{{article.body}}"
+            minLength="20"
+            required>
         </textarea>
+        <div *ngIf="body.invalid && body.dirty || body.touched">
+          <div *ngIf="body.errors?.required">
+            To pole nie może być puste
+          </div>
+          <div *ngIf="body.errors?.minlength">
+            To pole musi zawierać do najmniej 20 znaków
+          </div>
+        </div>
         </div>
         <div class="form-field">
           <label for="date">Data</label>
-          <input id="date" type="date" [(ngModel)]="article.date" name="date" />
+          <input
+            id="date"
+            [(ngModel)]="article.date"
+            type="date"
+            formControlName="date"
+            value="{{article.date}}"
+            required
+           />
         </div>
         <div class="form-field">
           <label for="type">Typ</label>
-          <select id="type" required name="type">
+          <select
+            id="type"
+            [(ngModel)]="article.type"
+            type="type"
+            formControlName="type"
+            required
+            >
             <option *ngFor="let type of types" [value]="type">{{ type }}</option>
           </select>
         </div>

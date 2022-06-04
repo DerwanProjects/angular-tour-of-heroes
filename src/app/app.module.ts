@@ -14,7 +14,7 @@ import { FontLgDirective } from './font-lg.directive';
 import { ArticleLengthDirective } from './article-length.directive';
 import { TrimLengthPipe } from './pipes/trim-length.pipe';
 import { ArticlesRouterModule } from './app-articles-router.module';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -33,7 +33,7 @@ import { FormsModule } from '@angular/forms';
   ],
   imports: [
     BrowserModule,
-    FormsModule,
+    ReactiveFormsModule,
     ArticlesRouterModule
   ],
   providers: [],

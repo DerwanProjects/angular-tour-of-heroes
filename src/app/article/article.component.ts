@@ -1,5 +1,5 @@
-import { Component, ElementRef, OnInit, Output, EventEmitter } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, ElementRef, OnInit } from '@angular/core';
+import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ArticleListService } from '../services/article-list.service';
 import { Article } from '../article.model';
@@ -12,7 +12,7 @@ import { Article } from '../article.model';
 })
 export class ArticleComponent implements OnInit {
 
-  @Output() onRefresh: EventEmitter<string> = new EventEmitter<string>();
+  editForm: FormGroup;
   article: Article | undefined;
   articlesList = this.articleListService.getAllArticles();
   types = ["excerpt", "full"];
@@ -27,23 +27,37 @@ export class ArticleComponent implements OnInit {
 
 
   ngOnInit(): void {
-    // let id = this.route.snapshot.paramMap.get('id');
     const id = this.route.snapshot.paramMap.get('id') || '';
-    console.log(id);
-    // this.getId = this.getId - 1;
-    // this.article = {
-    //   id: this.articleListService.articles[this.getId].id,
-    //   thumbnail: this.articleListService.articles[this.getId].thumbnail,
-    //   title: this.articleListService.articles[this.getId].title,
-    //   body: this.articleListService.articles[this.getId].body,
-    //   date: this.articleListService.articles[this.getId].date,
-    //   type: this.articleListService.articles[this.getId].type,
-    // }
-    // Jak pobrać artykuł ?
-    // console.log(this.route.snapshot);
     this.article = this.articleListService.getArticleById(+id);
+    this.editForm = new FormGroup ({
+      'id': new FormControl(this.article.id),
+      'thumbnail': new FormControl(this.article.thumbnail),
+      'title': new FormControl(this.article.title,
+        [Validators.required,
+         forbiddenNameValidator('test'),
+      ]),
+      'body': new FormControl(this.article.body,
+        [
+          Validators.required,
+          Validators.minLength(20),
+        ]),
+      'date': new FormControl(this.article.date),
+      'type': new FormControl(this.article.type),
+    });
+    console.log(id);
+
   }
 
+
+  get thumbnail() {
+    return this.editForm.get('thumbnail');
+  }
+  get title() {
+    return this.editForm.get('title');
+  }
+  get body() {
+    return this.editForm.get('body');
+  }
 
 
   enableEditing() {
@@ -51,20 +65,26 @@ export class ArticleComponent implements OnInit {
   }
 
 
-  onSubmit(form: NgForm): void {
+  onSubmit(): void {
+    const form = this.editForm;
     const article = new Article(form.value.id, form.value.thumbnail, form.value.title, form.value.body, form.value.date, 'test');
     this.articleListService.saveArticle(article);
+    console.log(article);
   }
 
 
 
   onClickBack() {
     this.router.navigate(['/']);
-    this.onRefresh.emit('Hello from Child');
   }
 
-
-
-
-
 }
+
+
+export function forbiddenNameValidator(forbiddenName: string): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+      return forbiddenName == control.value
+        ? {forbiddenName: {value: control.value}} : null;
+  };
+}
+
