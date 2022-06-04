@@ -13,6 +13,7 @@ import { HeaderComponent } from './header/header.component';
 import { MyFormComponent } from './my-form/my-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,6 +26,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ArticleComponent,
     HeaderComponent,
     MyFormComponent
+
   ],
   imports: [
     BrowserModule,
