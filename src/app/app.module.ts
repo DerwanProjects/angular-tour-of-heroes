@@ -13,6 +13,8 @@ import { HeaderComponent } from './header/header.component';
 import { FontLgDirective } from './font-lg.directive';
 import { ArticleLengthDirective } from './article-length.directive';
 import { TrimLengthPipe } from './pipes/trim-length.pipe';
+import { ArticlesRouterModule } from './app-articles-router.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -27,10 +29,12 @@ import { TrimLengthPipe } from './pipes/trim-length.pipe';
     HeaderComponent,
     FontLgDirective,
     ArticleLengthDirective,
-    TrimLengthPipe
+    TrimLengthPipe,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    ReactiveFormsModule,
+    ArticlesRouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]

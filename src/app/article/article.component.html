@@ -1,1 +1,110 @@
-<p>article works!</p>
+<ng-container *ngIf="article">
+  <button (click)="onClickBack()">
+    &lt; Wróć</button>
+
+      <article class="article__item" [hidden]="editingEnabled">
+        <header>
+          <img class="article__img" src="{{ article.thumbnail }}">
+          <time class="article__date">{{ article.date }}r.</time>
+          <h3 class="article__h3">{{ article.title }} </h3>
+        </header>
+        <main>
+          <div class="article__content">
+            <p class="article__p">
+              {{ article.body }}
+            </p>
+          </div>
+        </main>
+        <footer style="display: flex;justify-content: center;margin:15px 0;">
+          <button (click)="enableEditing()">Edycja</button>
+        </footer>
+      </article>
+
+
+
+      <form [hidden]="!editingEnabled" [formGroup]="editForm" (ngSubmit)="onSubmit()">
+        <div class="form-field">
+          <label for="thumbnail">Thumbnail</label>
+          <input
+            id="thumbnail"
+            [(ngModel)]="article.thumbnail"
+            type="text"
+            formControlName="thumbnail"
+            value="{{article.thumbnail}}"
+            required
+          />
+          <div *ngIf="thumbnail.invalid && (thumbnail.dirty || thumbnail.touched)">
+            <div *ngIf="thumbnail.errors?.['required']">
+              To pole nie może być puste
+            </div>
+
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="title">Tytuł</label>
+          <input
+            id="title"
+            [(ngModel)]="article.title"
+            type="text"
+            formControlName="title"
+            value="{{article.title}}"
+            appUniqueName="anaa"
+            required
+          />
+          <div *ngIf="title.invalid && (title.dirty || title.touched)">
+            <div *ngIf="title.errors?.required">
+              To pole nie może być puste
+            </div>
+            <div *ngIf="title.errors?.forbiddenName">
+              Pole nie może zawierać:&nbsp;{{ title.errors?.forbiddenName.value }}
+            </div>
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="body">Treść</label>
+          <textarea
+            class="edit__body"
+            id="body"
+            [(ngModel)]="article.body"
+            type="text"
+            formControlName="body"
+            value="{{article.body}}"
+            minLength="20"
+            required>
+        </textarea>
+        <div *ngIf="body.invalid && body.dirty || body.touched">
+          <div *ngIf="body.errors?.required">
+            To pole nie może być puste
+          </div>
+          <div *ngIf="body.errors?.minlength">
+            To pole musi zawierać do najmniej 20 znaków
+          </div>
+        </div>
+        </div>
+        <div class="form-field">
+          <label for="date">Data</label>
+          <input
+            id="date"
+            [(ngModel)]="article.date"
+            type="date"
+            formControlName="date"
+            value="{{article.date}}"
+            required
+           />
+        </div>
+        <div class="form-field">
+          <label for="type">Typ</label>
+          <select
+            id="type"
+            [(ngModel)]="article.type"
+            type="type"
+            formControlName="type"
+            required
+            >
+            <option *ngFor="let type of types" [value]="type">{{ type }}</option>
+          </select>
+        </div>
+        <button (click)="enableEditing()">Zapisz</button>
+      </form>
+
+</ng-container>

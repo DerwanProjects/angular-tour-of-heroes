@@ -1,0 +1,33 @@
+:host {
+  width: 100%;
+    max-width: 500px;
+}
+
+.article__item {
+  text-align: center;
+}
+.article__img {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+label {
+  display: block;
+  text-align: center;
+}
+
+.form-field {
+  margin: 20px 0;
+
+}
+
+input,
+textarea {
+  width: 100%;
+}
+
+textarea {
+  height: 400px;
+}

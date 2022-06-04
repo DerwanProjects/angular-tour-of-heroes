@@ -1,20 +1,30 @@
 .article-list {
   list-style-type: none;
   display: flex;
+  gap: 20px;
   flex-wrap: wrap;
-  align-items: center;
-  flex-direction: column;
+  justify-content: center;
   padding: 0;
 }
 
 .article-list__heading {
-  color: orangered;
+  color: teal;
+  text-align: center;
+}
+.article-list__heading span {
+  color: orange;
+  display: block;
+  font-size: 15px;
+  font-style: italic;
+  font-weight: 100;
+  margin: 10px 0;
+  text-align: center;
   text-decoration: underline;
 }
 
 .article-list__item {
   border: 1px solid #D3D3D3;
-  width: 100%;
+  width: calc(25% - 17px);
   max-width: 400px;
   margin: 10px 0;
 }
@@ -41,6 +51,7 @@
 .article-list__more {
   border: 3px solid #ddd;
   color: #000;
+  cursor: pointer;
   display: block;
   font: 700 12px/14px 'Manrope', sans-serif;
   padding: 13px 60px 13px 20px;
