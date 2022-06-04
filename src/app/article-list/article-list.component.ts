@@ -41,6 +41,7 @@ export class ArticleListComponent implements OnInit {
 
 
 
+
   // 6. kiedy w komponencie zapisujesz dane korzystasz z service.saveArticle(article); po czym do lokalnej wersji article podmieniasz wartość za pomocą service.getArticles()
 
 
