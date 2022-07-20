@@ -1,5 +1,7 @@
-import { Component, OnInit, ChangeDetectorRef, AfterViewInit  } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, AfterViewInit, OnDestroy  } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, NavigationError, NavigationStart, Router, Event } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
+import { ArticleApiService } from '../services/article-api.service';
 import { ArticleListService } from '../services/article-list.service';
 
 @Component({
@@ -8,10 +10,10 @@ import { ArticleListService } from '../services/article-list.service';
   styleUrls: ['./article-list.component.css'],
   providers: [ArticleListService]
 })
-export class ArticleListComponent implements OnInit {
+export class ArticleListComponent implements OnInit, OnDestroy {
 
 
-
+  private unsubscribeSubject = new Subject<void>();
   isActive = false;
   articlesList: any;
   urlAddress: string;
@@ -68,6 +70,7 @@ export class ArticleListComponent implements OnInit {
   }
 
   constructor(
+            private api: ArticleApiService,
             private changeDetector: ChangeDetectorRef,
             private articleListService: ArticleListService,
             private router: Router,
@@ -80,7 +83,7 @@ export class ArticleListComponent implements OnInit {
 
   fetchData(): void {
     console.log('fetch Data Before', this.articlesList);
-    this.articlesList = [...this.articleListService.getAllArticles()];
+    // this.articlesList = [...this.articleListService.getAllArticles()];
     console.log('fetch Data After', this.articlesList);
   }
 
@@ -113,8 +116,18 @@ export class ArticleListComponent implements OnInit {
     this.route.snapshot.url.forEach(element => {
         this.buildUrl +=  '/' + element.path;
     });
+    this.api.getAll()
+    .pipe(takeUntil(this.unsubscribeSubject))
+    .subscribe((result) => {
+      console.log(result);
+      this.articlesList = result;
+    })
   }
 
+  ngOnDestroy(): void {
+    this.unsubscribeSubject.complete();
+    this.unsubscribeSubject.unsubscribe();
+  }
 
 
 

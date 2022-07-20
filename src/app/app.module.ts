@@ -15,6 +15,7 @@ import { ArticleLengthDirective } from './article-length.directive';
 import { TrimLengthPipe } from './pipes/trim-length.pipe';
 import { ArticlesRouterModule } from './app-articles-router.module';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     FormsModule,
-    ArticlesRouterModule
+    ArticlesRouterModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

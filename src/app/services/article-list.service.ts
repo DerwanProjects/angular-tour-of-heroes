@@ -1,5 +1,6 @@
 import { Injectable, EventEmitter, Output, ChangeDetectorRef } from '@angular/core';
 import { Article } from '../article.model';
+import { ArticleApiService } from './article-api.service';
 
 
 let articles: Array<Article> = [
@@ -46,6 +47,9 @@ let articles: Array<Article> = [
 ] as Array<Article>;
 
 
+
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -57,7 +61,9 @@ export class ArticleListService {
   private articles: Array<Article>;
 
   constructor(
-    ) { this.articles = articles; }
+    private api: ArticleApiService
+    ) { this.articles = articles;
+       console.log(this.api.getAll()) }
 
 
   // makeUnixTimestamp(dateString: string): number {

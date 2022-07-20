@@ -3,6 +3,9 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ArticleListService } from '../services/article-list.service';
 import { Article } from '../article.model';
+import { ArticleApiService } from '../services/article-api.service';
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 @Component({
   selector: 'app-article',
@@ -20,6 +23,7 @@ export class ArticleComponent implements OnInit {
   editingEnabled:boolean = false;
 
   constructor(
+    private api: ArticleApiService,
     private router: Router,
     private route: ActivatedRoute,
     private articleListService: ArticleListService,
@@ -41,7 +45,18 @@ export class ArticleComponent implements OnInit {
     // }
     // Jak pobrać artykuł ?
     // console.log(this.route.snapshot);
-    this.article = this.articleListService.getArticleById(+id);
+    // this.article = this.articleListService.getArticleById(+id);
+    this.api.getById(-1)
+    .pipe(
+      catchError(error => {
+        console.log('Article Component', error);
+        return throwError('Panie, coś nie działa w Article')
+      })
+
+    )
+    .subscribe(article => {
+      this.article = (article as unknown) as Article;
+    });
   }
 
 

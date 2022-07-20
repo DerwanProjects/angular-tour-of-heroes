@@ -8,3 +8,18 @@ export class Article {
     public type: string,
   ) {}
 }
+
+export interface ArticleResponse {
+  id: number,
+  reactions: number,
+  userId: number,
+  tags: string[],
+  body: string
+}
+
+export interface ArticlesResponse {
+  limit: number,
+  skip: number,
+  total: number,
+  posts: ArticleResponse[]
+}
