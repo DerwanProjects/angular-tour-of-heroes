@@ -2,26 +2,18 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { HelloWorldComponent } from './hello-world/hello-world.component';
-import { ParentComponent } from './parent/parent.component';
-import { ChildComponent } from './child/child.component';
-import { FooterComponent } from './footer/footer.component';
-import { ArticleListComponent } from './article-list/article-list.component';
 import { HighlightDirective } from './highlight.directive';
-import { ArticleComponent } from './article/article.component';
-import { HeaderComponent } from './header/header.component';
+import { MatchingGameComponent } from './matching-game/matching-game.component';
+import { Game1Component } from './game1/game1.component';
+import { Game2Component } from './game2/game2.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HelloWorldComponent,
-    ParentComponent,
-    ChildComponent,
-    FooterComponent,
-    ArticleListComponent,
     HighlightDirective,
-    ArticleComponent,
-    HeaderComponent
+    MatchingGameComponent,
+    Game1Component,
+    Game2Component
   ],
   imports: [
     BrowserModule
